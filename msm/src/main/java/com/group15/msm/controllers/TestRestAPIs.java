@@ -1,6 +1,9 @@
 package com.group15.msm.controllers;
+import com.group15.msm.security.CurrentUser;
+import com.group15.msm.security.service.UserPrinciple;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 /**
  * @author: laviet
@@ -18,7 +21,9 @@ public class TestRestAPIs {
 
     @GetMapping("/api/test/pm")
     @PreAuthorize("hasRole('PM') or hasRole('ADMIN')")
-    public String projectManagementAccess() {
+    public String projectManagementAccess(@CurrentUser UserPrinciple userPrincipal) {
+        System.out.println(userPrincipal.getUsername());
+        System.out.println("vao day roi");
         return ">>> Board Management Project";
     }
 
@@ -26,5 +31,13 @@ public class TestRestAPIs {
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {
         return ">>> Admin Contents";
+    }
+    @GetMapping("/norole")
+    public String testMethod1(){
+        return "no role";
+    }
+    @GetMapping("/denied")
+    public String testMethod2(){
+        return "try cap denied";
     }
 }

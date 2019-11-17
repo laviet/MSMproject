@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.validation.Valid;
 
 
+import com.group15.msm.security.CurrentUser;
+import com.group15.msm.security.service.UserPrinciple;
+import com.sun.security.auth.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -58,7 +61,7 @@ public class AuthRestAPIs {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-
+        System.out.println(loginRequest.getUsername()+" "+loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
