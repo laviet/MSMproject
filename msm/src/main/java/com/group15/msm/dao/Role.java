@@ -1,4 +1,4 @@
-package com.group15.msm.model;
+package com.group15.msm.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

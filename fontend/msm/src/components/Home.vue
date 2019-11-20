@@ -1,8 +1,18 @@
 <template>
-    <div>
-        this is home
-         <router-link  to="/test">Test</router-link><br>
-         <router-link  to="/login">Login</router-link><br>
-             <router-view></router-view>
-    </div>
+  <div>
+    <Header></Header>
+    <router-view></router-view>
+    <Footer></Footer>
+  </div>
 </template>
+
+<script>
+import Header from "./layout/Header.vue";
+import Footer from "./layout/Footer.vue";
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
+</script>

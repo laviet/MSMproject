@@ -2,7 +2,7 @@ package com.group15.msm.repository;
 
 import java.util.Optional;
 
-import com.group15.msm.model.User;
+import com.group15.msm.dao.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

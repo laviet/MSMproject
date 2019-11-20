@@ -13,17 +13,31 @@ export const store = new Vuex.Store({
 
         accessToken: null,
         loggingIn: false,
-        loginError: null
+        loginError: null,
+        currentUser: null,
+        message: null,
+        roles:[]
     },
     mutations: {
         increament(state, n) {
             // state.number+=n.amount
             state.dataTest = n
         },
-        loginStart: state => state.loggingIn = true,
+        currentUserSave: (state, user)=>{
+          state.currentUser=user
+        },
+        rolesSave: (state, roles)=>{
+          state.roles=roles
+        },
+        loginStart: (state, message) => {
+          state.loggingIn = true
+          state.loginError=message;
+          state.message='Đăng nhập thành công'
+        },
         loginStop: (state, errorMessage) => {
           state.loggingIn = false;
           state.loginError = errorMessage;
+          state.message='Sai thông tin đăng nhập'
         },
         updateAccessToken: (state, accessToken) => {
           state.accessToken = accessToken;
@@ -38,23 +52,30 @@ export const store = new Vuex.Store({
         },
 
         doLogin({ commit }, loginData) {
-            commit('loginStart');
+            
       
             axios.post('http://localhost:9090/api/auth/signin', {
               ...loginData
             })
             .then(response => {
               localStorage.setItem('accessToken', response.data.token);
-              commit('loginStop', null);
+              localStorage.setItem('userLogin', response.data.currentUser);
+              localStorage.setItem('rolesUser',JSON.stringify(response.data.role) );
               commit('updateAccessToken', response.data.token);
+              commit('loginStart',null);
+              commit('currentUserSave', response.data.currentUser)
+              commit('rolesSave', response.data.role)
             })
             .catch(error => {
               commit('loginStop', error.response.data.error);
               commit('updateAccessToken', null);
+              commit('currentUserSave', null)
             })
           },
           fetchAccessToken({ commit }) {
             commit('updateAccessToken', localStorage.getItem('accessToken'));
+            commit('currentUserSave', localStorage.getItem('userLogin'));
+            commit('rolesSave', JSON.parse(localStorage.getItem('rolesUser')));
           }
     },
     getters: {

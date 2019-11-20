@@ -28,10 +28,15 @@ export default {
     ...Vuex.mapState(['dataTest'])
   },
   methods: {
+    
     ...Vuex.mapMutations({ changeByMutations: "increament" }),
     ...Vuex.mapActions({ changeByAcions: "increamentAction" })
   }
 };
 </script>
+
+<style lang="scss" scoped>
+
+</style>
 
 

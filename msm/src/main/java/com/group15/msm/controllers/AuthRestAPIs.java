@@ -6,11 +6,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 
-import com.group15.msm.security.CurrentUser;
-import com.group15.msm.security.service.UserPrinciple;
-import com.sun.security.auth.UserPrincipal;
+import com.group15.msm.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group15.msm.message.request.LoginForm;
 import com.group15.msm.message.request.SignUpForm;
 import com.group15.msm.message.response.JwtResponse;
-import com.group15.msm.model.Role;
-import com.group15.msm.model.RoleName;
-import com.group15.msm.model.User;
+import com.group15.msm.dao.Role;
+import com.group15.msm.dao.RoleName;
+import com.group15.msm.dao.User;
 import com.group15.msm.repository.RoleRepository;
 import com.group15.msm.repository.UserRepository;
 import com.group15.msm.security.jwt.JwtProvider;
@@ -58,6 +55,8 @@ public class AuthRestAPIs {
 
     @Autowired
     JwtProvider jwtProvider;
+    @Autowired
+    UserDetailsServiceImpl userDetailsServiceImpl;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -68,13 +67,14 @@ public class AuthRestAPIs {
                         loginRequest.getPassword()
                 )
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        String userLogin=userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getName();
+        Set<Role> role =userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getRoles();
+        System.out.println("role la : "+role);
+        return ResponseEntity.ok(new JwtResponse(jwt,userLogin, role));
     }
-
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -102,8 +102,8 @@ public class AuthRestAPIs {
                     roles.add(adminRole);
 
                     break;
-                case "pm":
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+                case "employee":
+                    Role pmRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
                     roles.add(pmRole);
 
@@ -118,6 +118,6 @@ public class AuthRestAPIs {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok().body("User registered successfully!");
+        return ResponseEntity.ok().body("Đăng ký thành công");
     }
 }

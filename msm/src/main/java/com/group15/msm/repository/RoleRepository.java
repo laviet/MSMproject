@@ -1,7 +1,7 @@
 package com.group15.msm.repository;
 
-import com.group15.msm.model.Role;
-import com.group15.msm.model.RoleName;
+import com.group15.msm.dao.Role;
+import com.group15.msm.dao.RoleName;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.group15.msm.model;
+package com.group15.msm.dao;
 
 /**
  * @author: laviet
@@ -8,6 +8,6 @@ package com.group15.msm.model;
  */
 public enum RoleName {
     ROLE_USER,
-    ROLE_PM,
+    ROLE_EMPLOYEE,
     ROLE_ADMIN
 }

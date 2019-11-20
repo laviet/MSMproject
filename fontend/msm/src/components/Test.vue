@@ -10,6 +10,11 @@
 <script>
 import Axios from "../http-commom.js";
 
+var myConfig = {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("accessToken")
+  }
+};
 export default {
   data() {
     return {
@@ -19,21 +24,18 @@ export default {
   },
   methods: {
     getData() {
-      const myConfig = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken")
-        }
-      };
       this.token = localStorage.getItem("accessToken");
-      Axios.get("api/test/admin", myConfig).then(response => {
-          alert('hoe')
-        this.datatest = response;
-      }).catch(err=>{
-          alert("heelo"+err)
-      })
+      Axios.get("api/test/customer", myConfig)
+        .then(response => {
+
+          this.datatest = response;
+        })
+        .catch(err => {
+          alert("loi roi" + err);
+        });
     },
-    removeToken(){
-        Axios.get("norole").then(response => {
+    removeToken() {
+      Axios.get("norole").then(response => {
         this.datatest = response.data;
       });
     }

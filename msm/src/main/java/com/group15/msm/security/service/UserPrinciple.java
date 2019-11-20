@@ -1,7 +1,7 @@
 package com.group15.msm.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.group15.msm.model.User;
+import com.group15.msm.dao.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,9 @@ public class UserPrinciple implements UserDetails {
 
     @JsonIgnore
     private String password;
+     public UserPrinciple(){
 
+     }
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrinciple(Long id, String name,

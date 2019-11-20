@@ -19,12 +19,12 @@ public class TestRestAPIs {
         return ">>> User Contents!";
     }
 
-    @GetMapping("/api/test/pm")
-    @PreAuthorize("hasRole('PM') or hasRole('ADMIN')")
-    public String projectManagementAccess(@CurrentUser UserPrinciple userPrincipal) {
-        System.out.println(userPrincipal.getUsername());
-        System.out.println("vao day roi");
-        return ">>> Board Management Project";
+    @GetMapping("/api/test/customer")
+    @PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+    public UserPrinciple projectManagementAccess(@CurrentUser UserPrinciple userPrincipal) {
+        System.out.println(userPrincipal);
+        System.out.println("vao customer roi");
+        return userPrincipal;
     }
 
     @GetMapping("/api/test/admin")

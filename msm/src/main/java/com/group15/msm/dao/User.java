@@ -1,4 +1,4 @@
-package com.group15.msm.model;
+package com.group15.msm.dao;
 
 import java.util.HashSet;
 import java.util.Set;

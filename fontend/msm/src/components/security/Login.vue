@@ -35,17 +35,6 @@ export default {
     ...Vuex.mapState(["loggingIn", "loginError", "accessToken"])
   },
   methods: {
-    //     loginMethod() {
-    //       httpCommom.post("/api/auth/signin", this.credential).then(response => {
-    //         this.dataresponse = response.data.token;
-    //       })
-    //       .catch(err=>{
-    //           this.status=err
-    //           alert('fail')
-    //           this.message=err.message
-    //           console(this.message.message)
-    //       });
-    //     },
     ...Vuex.mapActions(["fetchAccessToken"]),
     ...Vuex.mapActions(["doLogin"]),
     loginSubmit() {
