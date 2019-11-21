@@ -72,7 +72,6 @@ public class AuthRestAPIs {
         String jwt = jwtProvider.generateJwtToken(authentication);
         String userLogin=userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getName();
         Set<Role> role =userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getRoles();
-        System.out.println("role la : "+role);
         return ResponseEntity.ok(new JwtResponse(jwt,userLogin, role));
     }
     @PostMapping("/signup")

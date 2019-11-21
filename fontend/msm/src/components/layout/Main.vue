@@ -1,7 +1,6 @@
 <template>
   <div>
       this is main
-    <p>role la: {{roles}}</p>
   </div>
 </template>
 

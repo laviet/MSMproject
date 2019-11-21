@@ -9,6 +9,7 @@ import org.dozer.DozerBeanMapper;
  * Time: 21:51
  */
 public class BeanMapper {
+    //coppy bean
     public static void BeanCoppy(Object source, Object destination) {
         DozerBeanMapper beanMapper=new DozerBeanMapper();
         beanMapper.map(source, destination);

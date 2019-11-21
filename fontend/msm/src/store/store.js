@@ -23,6 +23,9 @@ export const store = new Vuex.Store({
             // state.number+=n.amount
             state.dataTest = n
         },
+        removeMessage:(state, message)=>{
+            state.message=message
+        },
         currentUserSave: (state, user)=>{
           state.currentUser=user
         },
@@ -76,6 +79,9 @@ export const store = new Vuex.Store({
             commit('updateAccessToken', localStorage.getItem('accessToken'));
             commit('currentUserSave', localStorage.getItem('userLogin'));
             commit('rolesSave', JSON.parse(localStorage.getItem('rolesUser')));
+          },
+          removeAlert({commit}){
+            commit('removeMessage', null)
           }
     },
     getters: {

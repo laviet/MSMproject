@@ -90,7 +90,7 @@ export default {
           { required: true, message: "Nhập email", trigger: "blur" },
           {
             type: "email",
-            message: "Nhập email hợp lệ",
+            message: "Email không hợp lệ",
             trigger: ["blur", "change"]
           }
         ],

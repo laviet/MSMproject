@@ -40,8 +40,6 @@
     <Login :visibleLogin="loginShow" @login-close="loginShow=false" />
 
     <Register :visibleRegister="registerShow" @register-close="registerShow=false" />
-
-      <p>this is p: {{roles}}</p>
   </div>
 </template>
 
@@ -62,27 +60,30 @@ export default {
     };
   },
   methods: {
-    ...Vuex.mapActions(["fetchAccessToken"]),
+    ...Vuex.mapActions(["fetchAccessToken", "removeAlert"]),
     homeMethod() {
       this.$router.push("/");
     },
     logoutMethod() {
+      alert("Bạn có muốn đăng xuất")
       localStorage.removeItem("userLogin");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("message");
       this.fetchAccessToken();
+      this.removeAlert();
+      this.$router.push('/')
     },
     handCommand(command) {
       if (command == 1) {
         let lengthRole=this.roles.length
         for(let i=0; i<lengthRole;i++){
           if("ROLE_ADMIN"==this.roles[i].name||"ROLE_EMPLOYEE"==this.roles[i].name){
-            alert('admin a employee')
-            this.$router.push('/user/up')
+            this.$router.push('/employee')
             return true
           }
         }
         for(let i=0; i<lengthRole;i++){
           if("ROLE_USER"==this.roles[i].name){
-            alert('user')
             this.$router.push('/customer/cus')
             return true
           }
@@ -94,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...Vuex.mapState(["loggingIn", "loginError", "accessToken", "currentUser","roles"])
+    ...Vuex.mapState(["loggingIn", "loginError", "accessToken", "currentUser","roles","message"])
   }
 };
 </script>
