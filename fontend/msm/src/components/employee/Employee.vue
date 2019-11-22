@@ -2,8 +2,8 @@
   <div>
     <el-card>
       <div slot="header" class="header">
-        <span>thông tin cá nhân</span>
-        <el-button type='text' @click="updateEmployee">Sửa thông tin</el-button>
+        <span>thông tin nhân viên</span>
+        <el-button type="text" @click="updateEmployee">Sửa thông tin</el-button>
       </div>
       <div class="text-box">
         <div class="left">
@@ -18,6 +18,9 @@
             <div>Giới tính</div>
             <br />
             <br />
+            <div>Ngày sinh</div>
+            <br />
+            <br />
             <div>Địa chỉ</div>
             <br />
             <br />
@@ -30,6 +33,15 @@
             <br />
             <div>{{employee.gioitinh}}</div>
             <br />
+            <br />
+            <div>
+              <el-date-picker
+                v-model="employee.ngaysinh"
+                type="date"
+                format="dd - MM - yyyy"
+                readonly
+              ></el-date-picker>
+            </div>
             <br />
             <div>{{employee.diachi}}</div>
             <br />
@@ -52,8 +64,8 @@ export default {
     };
   },
   methods: {
-    updateEmployee(){
-      this.$router.push('employee/update')
+    updateEmployee() {
+      this.$router.push("employee/update");
     },
     getEmployee() {
       var myConfig = {
@@ -87,7 +99,7 @@ export default {
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
-    .el-button{
+    .el-button {
       float: right;
       color: blue;
       text-decoration: underline;

@@ -7,28 +7,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import java.util.Date;
 
 /**
  * @author: laviet
  * Version: 1.0
- * Create date: 21-11-2019
- * Time: 08:45
+ * Create date: 22-11-2019
+ * Time: 09:51
  */
 @Setter
 @Getter
 @Entity
-@Table(name = "nhanvien")
-public class EmployeeDao {
+@Table(name = "khachhang")
+public class CustomerDao {
     @Id
-    private int manhanvien;
-    private String tennhanvien;
-    @Column(unique = true)
-    @Email
+    private int makhachhang;
+    @Column(nullable = false)
+    private String tenkhachhang;
     private String email;
     private String gioitinh;
-    private Date ngaysinh;
     private String diachi;
     private String sdt;
 }

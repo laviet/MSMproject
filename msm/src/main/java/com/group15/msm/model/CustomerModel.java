@@ -3,27 +3,22 @@ package com.group15.msm.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 /**
  * @author: laviet
  * Version: 1.0
- * Create date: 21-11-2019
- * Time: 09:14
+ * Create date: 22-11-2019
+ * Time: 09:54
  */
 @Getter
 @Setter
-public class EmployeeModel {
-    private int manhanvien;
+public class CustomerModel {
+    private int makhachhang;
     @NotBlank
-    private String tennhanvien;
-    @NotBlank
-    @Email
+    private String tenkhachhang;
     private String email;
     private String gioitinh;
-    private Date ngaysinh;
     private String diachi;
     private String sdt;
 }

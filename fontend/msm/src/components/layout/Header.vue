@@ -19,7 +19,7 @@
         <el-button class="button" type="text" @click="logoutMethod">Đăng xuất</el-button>
         <span class="button">{{currentUser}}</span>
         <el-dropdown class="dropdown" @command="handCommand">
-          <el-button type="text" class="dropdown" >
+          <el-button type="text" class="dropdown">
             Thông tin
             <i class="el-icon-caret-bottom el-icon--right"></i>
           </el-button>
@@ -27,7 +27,6 @@
             <el-dropdown-item command="1">Xem thông tin cá nhân</el-dropdown-item>
             <el-dropdown-item command="2">Cập nhật thông tin</el-dropdown-item>
             <el-dropdown-item command="3">Theo dõi đơn hàng</el-dropdown-item>
-            <el-dropdown-item command="4">Đổi mật khẩu</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </span>
@@ -65,37 +64,64 @@ export default {
       this.$router.push("/");
     },
     logoutMethod() {
-      alert("Bạn có muốn đăng xuất")
+      if(confirm("Bạn có muốn đăng xuất")){
       localStorage.removeItem("userLogin");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("message");
       this.fetchAccessToken();
       this.removeAlert();
-      this.$router.push('/')
+      this.$router.push("/");
+      }
     },
     handCommand(command) {
       if (command == 1) {
-        let lengthRole=this.roles.length
-        for(let i=0; i<lengthRole;i++){
-          if("ROLE_ADMIN"==this.roles[i].name||"ROLE_EMPLOYEE"==this.roles[i].name){
-            this.$router.push('/employee')
-            return true
+        let lengthRole = this.roles.length;
+        for (let i = 0; i < lengthRole; i++) {
+          if (
+            "ROLE_ADMIN" == this.roles[i].name ||
+            "ROLE_EMPLOYEE" == this.roles[i].name
+          ) {
+            this.$router.push("/employee");
+            return true;
           }
         }
-        for(let i=0; i<lengthRole;i++){
-          if("ROLE_USER"==this.roles[i].name){
-            this.$router.push('/customer/cus')
-            return true
+        for (let i = 0; i < lengthRole; i++) {
+          if ("ROLE_USER" == this.roles[i].name) {
+            this.$router.push("/customer");
+            return true;
           }
         }
-
+      } else if (command == 2) {
+        let lengthRole = this.roles.length;
+        for (let i = 0; i < lengthRole; i++) {
+          if (
+            "ROLE_ADMIN" == this.roles[i].name ||
+            "ROLE_EMPLOYEE" == this.roles[i].name
+          ) {
+            this.$router.push("/employee/update");
+            return true;
+          }
+        }
+        for (let i = 0; i < lengthRole; i++) {
+          if ("ROLE_USER" == this.roles[i].name) {
+            this.$router.push("/customer/update");
+            return true;
+          }
+        }
       } else {
         alert(command);
       }
     }
   },
   computed: {
-    ...Vuex.mapState(["loggingIn", "loginError", "accessToken", "currentUser","roles","message"])
+    ...Vuex.mapState([
+      "loggingIn",
+      "loginError",
+      "accessToken",
+      "currentUser",
+      "roles",
+      "message"
+    ])
   }
 };
 </script>

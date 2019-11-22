@@ -35,24 +35,25 @@ public class EmployeeController {
     public ResponseEntity getEmployee(@CurrentUser UserPrinciple userPrinciple) {
         Optional<EmployeeDao> employeeDao = employeeService.getEmployeeById(userPrinciple.getId().intValue());
         EmployeeModel employeeModel = new EmployeeModel();
-        if(employeeDao.isPresent()){
+        if (employeeDao.isPresent()) {
             BeanMapper.BeanCoppy(employeeDao.get(), employeeModel);
-        }else{
+        } else {
             employeeModel.setManhanvien(userPrinciple.getId().intValue());
             employeeModel.setEmail(userPrinciple.getEmail());
             employeeModel.setTennhanvien(userPrinciple.getName());
         }
         return DataResponse.getData(employeeModel);
     }
+
     @Transactional
     @PostMapping("/updateEmployee")
-    public ResponseEntity<String> updateEmployee(@Valid @RequestBody EmployeeModel employeeModel){
-        Optional<UserDao> userDao=userLoginService.getUserById(employeeModel.getManhanvien());
-        EmployeeDao employeeDao=new EmployeeDao();
-        UserDao userDaoUpdate =new UserDao();
-        if(userDao.isPresent()){
+    public ResponseEntity<String> updateEmployee(@Valid @RequestBody EmployeeModel employeeModel) {
+        Optional<UserDao> userDao = userLoginService.getUserById(employeeModel.getManhanvien());
+        EmployeeDao employeeDao = new EmployeeDao();
+        UserDao userDaoUpdate = new UserDao();
+        if (userDao.isPresent()) {
             BeanMapper.BeanCoppy(employeeModel, employeeDao);
-           EmployeeDao employeeDaoUpdate= employeeService.setEmployee(employeeDao);
+            EmployeeDao employeeDaoUpdate = employeeService.setEmployee(employeeDao);
 
             userDaoUpdate.setId(employeeDaoUpdate.getManhanvien());
             userDaoUpdate.setEmail(employeeDaoUpdate.getEmail());
