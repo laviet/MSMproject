@@ -1,25 +1,17 @@
 <template>
   <div>
-      this is main
+     <img style="width: 150px; height: 150px" :src="require(`@/images/${namePicture}`)" />
+     <img style="width: 150px; height: 150px" src="@/images/pic1.jpg"/>
   </div>
 </template>
 
 <script>
-import Vuex from "vuex";
 export default {
-  methods: {
-          ...Vuex.mapActions(["fetchAccessToken"]),
-    logout() {
-      alert("dang xua");
-      localStorage.removeItem("currentUser");
-      this.$router.push("/");
-    }
-  },
-  computed:{
-       ...Vuex.mapState(["roles"])
-  },
-    created() {
-    this.fetchAccessToken();
+  data() {
+    return {
+      url: '@/images/pic1.jpg',
+      namePicture: 'pic2.jpg'
+    };
   }
 };
 </script>

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -28,7 +29,9 @@ public class EmployeeDao {
     @Email
     private String email;
     private String gioitinh;
+    @Past(message = "the birth is must great than current day")
     private Date ngaysinh;
     private String diachi;
     private String sdt;
+    private Date thoigiancapnhat;
 }

@@ -5,9 +5,10 @@ import Test from './components/Test.vue'
 import Login from './components/security/Login.vue'
 import Demo from './components/Demo.vue'
 import Main from './components/layout/Main.vue'
+import HelloWorld from './components/HelloWorld.vue'
 import EmployeeRouter from './components/employee/router.js'
 import CustomerRouter from './components/customer/router.js'
-import HelloWorld from './components/HelloWorld.vue'
+import InvoiceRouter from './components/invoice/router.js'
 
 
 Vue.use(Router);
@@ -24,8 +25,9 @@ export default new Router({
                 { path: 'demo', component: Demo },
                 { path: 'hello', component: HelloWorld },
             ]
-            .concat(EmployeeRouter)
-            .concat(CustomerRouter)
+                .concat(EmployeeRouter)
+                .concat(CustomerRouter)
+                .concat(InvoiceRouter)
         }
     ]
 

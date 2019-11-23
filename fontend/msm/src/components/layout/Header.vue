@@ -18,15 +18,35 @@
       <span v-if="currentUser">
         <el-button class="button" type="text" @click="logoutMethod">Đăng xuất</el-button>
         <span class="button">{{currentUser}}</span>
-        <el-dropdown class="dropdown" @command="handCommand">
+        <el-dropdown class="dropdown" @command="InformationHand">
           <el-button type="text" class="dropdown">
             Thông tin
             <i class="el-icon-caret-bottom el-icon--right"></i>
           </el-button>
           <el-dropdown-menu>
-            <el-dropdown-item command="1">Xem thông tin cá nhân</el-dropdown-item>
-            <el-dropdown-item command="2">Cập nhật thông tin</el-dropdown-item>
-            <el-dropdown-item command="3">Theo dõi đơn hàng</el-dropdown-item>
+            <el-dropdown-item command="profile">Xem thông tin cá nhân</el-dropdown-item>
+            <el-dropdown-item command="update">Cập nhật thông tin</el-dropdown-item>
+            <el-dropdown-item command="showInfor">Theo dõi đơn hàng</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-dropdown class="dropdown" @command="functionHand">
+          <el-button type="text" class="dropdown">
+            Chức năng
+            <i class="el-icon-caret-bottom el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu>
+            <span v-for="index in roles" :key="index.id">
+              <span v-if="index.name=='ROLE_USER'">
+                <el-dropdown-item command="comment">Nhận xét</el-dropdown-item>
+              </span>
+              <span v-if="index.name=='ROLE_EMPLOYEE'">
+                <el-dropdown-item command="createImportInvoice">Tạo hóa đơn nhập</el-dropdown-item>
+                <el-dropdown-item command="createExportInvoice">Tạo hóa đơn bán hàng</el-dropdown-item>
+              </span>
+              <span v-if="index.name=='ROLE_ADMIN'">
+                <el-dropdown-item command="showStatistic">Xem thống kê</el-dropdown-item>
+              </span>
+            </span>
           </el-dropdown-menu>
         </el-dropdown>
       </span>
@@ -64,17 +84,17 @@ export default {
       this.$router.push("/");
     },
     logoutMethod() {
-      if(confirm("Bạn có muốn đăng xuất")){
-      localStorage.removeItem("userLogin");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("message");
-      this.fetchAccessToken();
-      this.removeAlert();
-      this.$router.push("/");
+      if (confirm("Bạn có muốn đăng xuất")) {
+        localStorage.removeItem("userLogin");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("message");
+        this.fetchAccessToken();
+        this.removeAlert();
+        this.$router.push("/");
       }
     },
-    handCommand(command) {
-      if (command == 1) {
+    InformationHand(command) {
+      if (command == "profile") {
         let lengthRole = this.roles.length;
         for (let i = 0; i < lengthRole; i++) {
           if (
@@ -91,7 +111,7 @@ export default {
             return true;
           }
         }
-      } else if (command == 2) {
+      } else if (command == "update") {
         let lengthRole = this.roles.length;
         for (let i = 0; i < lengthRole; i++) {
           if (
@@ -110,6 +130,14 @@ export default {
         }
       } else {
         alert(command);
+      }
+    },
+    functionHand(command) {
+      if(command=='createImportInvoice'){
+        this.$router.push('/invoice/import')
+      }
+      if(command=='createExportInvoice'){
+         this.$router.push('/invoice/export')
       }
     }
   },
@@ -142,7 +170,7 @@ export default {
 }
 .search {
   width: 400px;
-  margin-left: 250px;
+  margin-left: 100px;
 }
 .button {
   text-transform: uppercase;

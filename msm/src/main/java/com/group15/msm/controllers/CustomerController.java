@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -55,6 +56,7 @@ public class CustomerController {
         UserDao userDaoUpdate = new UserDao();
         if (userDao.isPresent()) {
             BeanMapper.BeanCoppy(customerModel, customerDao);
+            customerDao.setThoigiancapnhat(new Date());
             CustomerDao customerDaoUpdate = customerService.setCustomer(customerDao);
 
             userDaoUpdate.setId(customerDaoUpdate.getMakhachhang());

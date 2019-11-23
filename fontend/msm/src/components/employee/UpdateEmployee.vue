@@ -26,13 +26,11 @@
         </el-form-item>
         <el-form-item label="Ngày sinh" prop="ngaysinh">
           <el-date-picker
-          v-model="employee.ngaysinh"
-          type='date'
-          format="dd - MM - yyyy"
-          placeholder="Chọn ngày sinh"
-          >
-
-          </el-date-picker>
+            v-model="employee.ngaysinh"
+            type="date"
+            format="dd - MM - yyyy"
+            placeholder="Chọn ngày sinh"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item label="Địa chỉ" prop="diachi">
           <el-input v-model="employee.diachi"></el-input>
@@ -47,7 +45,6 @@
         </el-form-item>
       </el-form>
     </el-card>
-  
   </div>
 </template>
 
@@ -55,17 +52,17 @@
 import Axios from "../../http-commom.js";
 export default {
   data() {
+    var checkDate = (rule, value, callback) => {
+      if (value > new Date()) {
+        callback(new Error("Chọn ngày nhỏ hơn hoặc bằng ngày hiện tại"));
+      } else {
+        callback();
+      }
+    };
     return {
       updateMessage: "",
       lablePosition: "left",
-      employee: {
-        manhanvien: "",
-        tennhanvien: "",
-        email: "",
-        gioitinh: "",
-        diachi: "",
-        sdt: ""
-      },
+      employee: null,
       rules: {
         tennhanvien: [
           { required: true, message: "Nhập tên nhân viên", trigger: "blur" }
@@ -77,6 +74,9 @@ export default {
             message: "Email không hợp lệ",
             trigger: ["blur", "change"]
           }
+        ],
+        ngaysinh: [
+           { validator: checkDate, trigger: "blur, change" }
         ]
       }
     };
@@ -93,10 +93,11 @@ export default {
       };
       this.$refs[data].validate(valid => {
         if (valid) {
-          Axios.post("employee/updateEmployee", this.employee, myConfig).then(resp => {
-            alert(resp.data)
-          });
-          
+          Axios.post("employee/updateEmployee", this.employee, myConfig).then(
+            resp => {
+              alert(resp.data);
+            }
+          );
         }
       });
     },

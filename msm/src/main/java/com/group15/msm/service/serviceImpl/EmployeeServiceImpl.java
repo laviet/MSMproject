@@ -30,4 +30,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return repository.save(employeeDao);
     }
 
+    @Override
+    public Iterable<EmployeeDao> getAllEmployee() {
+        return repository.findAll();
+    }
 }

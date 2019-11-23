@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -44,7 +45,11 @@ public class EmployeeController {
         }
         return DataResponse.getData(employeeModel);
     }
-
+    @GetMapping("/employees")
+    public ResponseEntity getEmployees(){
+        Iterable<EmployeeDao> employeeDaos=employeeService.getAllEmployee();
+        return DataResponse.getData(employeeDaos);
+    }
     @Transactional
     @PostMapping("/updateEmployee")
     public ResponseEntity<String> updateEmployee(@Valid @RequestBody EmployeeModel employeeModel) {
@@ -53,12 +58,12 @@ public class EmployeeController {
         UserDao userDaoUpdate = new UserDao();
         if (userDao.isPresent()) {
             BeanMapper.BeanCoppy(employeeModel, employeeDao);
+            employeeDao.setThoigiancapnhat(new Date());
             EmployeeDao employeeDaoUpdate = employeeService.setEmployee(employeeDao);
 
             userDaoUpdate.setId(employeeDaoUpdate.getManhanvien());
             userDaoUpdate.setEmail(employeeDaoUpdate.getEmail());
             userDaoUpdate.setName(employeeDaoUpdate.getTennhanvien());
-
             userLoginService.updateUser(userDaoUpdate);
 
             return ResponseEntity.ok().body("Cập nhật nhân viên thành công");

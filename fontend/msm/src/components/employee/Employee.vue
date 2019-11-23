@@ -34,14 +34,8 @@
             <div>{{employee.gioitinh}}</div>
             <br />
             <br />
-            <div>
-              <el-date-picker
-                v-model="employee.ngaysinh"
-                type="date"
-                format="dd - MM - yyyy"
-                readonly
-              ></el-date-picker>
-            </div>
+            <div>{{employee.ngaysinh|formatDate}}</div>
+            <br />
             <br />
             <div>{{employee.diachi}}</div>
             <br />
@@ -59,6 +53,7 @@ import Axios from "../../http-commom.js";
 
 export default {
   data() {
+
     return {
       employee: null
     };
