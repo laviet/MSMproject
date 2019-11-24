@@ -46,7 +46,7 @@ public class EmployeeController {
         return DataResponse.getData(employeeModel);
     }
     @GetMapping("/employees")
-    public ResponseEntity getEmployees(){
+    public ResponseEntity getAllEmployee(){
         Iterable<EmployeeDao> employeeDaos=employeeService.getAllEmployee();
         return DataResponse.getData(employeeDaos);
     }

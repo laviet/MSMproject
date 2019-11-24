@@ -1,7 +1,8 @@
 <template>
   <div>
-     <img style="width: 150px; height: 150px" :src="require(`@/images/${namePicture}`)" />
-     <img style="width: 150px; height: 150px" src="@/images/pic1.jpg"/>
+    this is main
+     <!-- <img style="width: 150px; height: 150px" :src="require(`@/images/${namePicture}`)" />
+     <img style="width: 150px; height: 150px" src="@/images/pic1.jpg"/> -->
   </div>
 </template>
 

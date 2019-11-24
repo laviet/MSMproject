@@ -18,11 +18,11 @@
           <el-input v-model="customer.email"></el-input>
         </el-form-item>
         <el-form-item label="Giới tính" prop="gioitinh">
-          <el-select v-model="customer.gioitinh">
-            <el-option value="Nam" label="Nam"></el-option>
-            <el-option value="Nữ" label="Nữ"></el-option>
-            <el-option value="Khác" label="Khác"></el-option>
-          </el-select>
+          <el-radio-group v-model="employee.gioitinh">
+            <el-radio  label="Nam"></el-radio>
+            <el-radio  label="Nữ"></el-radio>
+            <el-radio  label="Khác"></el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="Địa chỉ" prop="diachi">
           <el-input v-model="customer.diachi"></el-input>
