@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ import java.util.Date;
 @Setter
 public class ImportModel {
     @NotBlank
+    @Size(min=8)
     private String id;
     @Past
     private Date ngaynhap;

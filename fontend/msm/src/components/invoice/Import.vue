@@ -80,7 +80,6 @@
             </el-form-item>
             <el-form-item label="Số lượng" prop="soluong">
               <el-input-number
-
                 v-model="importData.soluong"
                 :min="1"
                 @change="calculateMoney(importData.soluong)"
@@ -101,12 +100,23 @@
         </div>
       </el-form>
     </el-card>
+
+    <ImportDetail
+      :visibleDetail="showDialog"
+      :detailId="chitietnhapId"
+      :inputNumber="number"
+      @dialog-close="showDialog=false"
+    />
   </div>
 </template>
 
 <script>
 import Axios from "../../http-commom.js";
+import ImportDetail from "./ImportDetail.vue";
 export default {
+  components: {
+    ImportDetail
+  },
   data() {
     var checkDate = (rule, value, callback) => {
       if (value > new Date()) {
@@ -122,6 +132,8 @@ export default {
       lablePosition: "left",
       priceProduct: null,
       number: null,
+      showDialog: false,
+      chitietnhapId: null,
 
       importData: {
         id: "",
@@ -130,7 +142,7 @@ export default {
         nhanvienId: null,
         sanphamId: "",
         soluong: null,
-        dongia: null,
+        dongia: null
       },
       rules: {
         id: [
@@ -167,13 +179,30 @@ export default {
       this.$refs[data].validate(valid => {
         if (valid) {
           Axios.post("import", this.importData, myConfig).then(resp => {
-            alert(resp.data);
+            if (resp.data) {
+              for (let i = 0; i < this.products.length; i++) {
+                if (this.importData.sanphamId == this.products[i].id) {
+                  if (this.products[i].loaisanpham == "Xe máy") {
+                    this.chitietnhapId = resp.data;
+                    this.showDialog = true;
+                  }else if(this.products[i].loaisanpham == "Phụ tùng"){
+                    for(let i=0;i<this.number;i++){
+                      let data={chitietnhapId: resp.data}
+                       Axios.post("import/motorcycleDetail",data, myConfig)
+                    }
+                    alert('Thành công')
+                  }
+                }
+              }
+            } else {
+              alert("error "+resp.data);
+            }
           });
         }
       });
     },
     reset(data) {
-        this.priceProduct=0
+      this.priceProduct = 0;
       this.$refs[data].resetFields();
     },
     calculateMoney(n) {
@@ -184,10 +213,10 @@ export default {
         if (id == this.products[i].id) {
           if (this.number) {
             this.priceProduct = this.products[i].dongia * this.number;
-            this.importData.dongia=this.priceProduct
+            this.importData.dongia = this.priceProduct;
           } else {
             this.priceProduct = this.products[i].dongia;
-            this.importData.dongia=this.priceProduct
+            this.importData.dongia = this.priceProduct;
           }
         }
       }
@@ -267,7 +296,7 @@ export default {
 .el-card {
   width: 70%;
   margin: 30px auto;
-  background: ghostwhite;
+  background: rgba(180, 182, 162, 0.582);
 
   .header {
     text-align: center;
