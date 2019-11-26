@@ -121,6 +121,7 @@ export default {
           .then(response=>{
             this.dataSignup=response.data
             alert(response.data)
+            this.$refs[data].resetFields();
             this.registerClose()
           })
           .catch(err=>{

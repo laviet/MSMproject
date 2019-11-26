@@ -21,4 +21,9 @@ public class ImportDetailServiceImpl implements ImportDetailService {
     public ImportDetailDao setImportDetail(ImportDetailDao detailDao) {
         return repository.save(detailDao);
     }
+
+    @Override
+    public Iterable<ImportDetailDao> getAllByProductId(String productId) {
+        return repository.getAllBySanphamId(productId);
+    }
 }

@@ -2,11 +2,11 @@
   <div>
     <el-dialog
       class="dialog"
-      title="Thông tin chi tiết cho từng sản phẩm"
+      title="Chọn số khung số máy"
       :visible.sync="visibleDetail"
       center
       :before-close="closeDialog"
-      width="30%"
+      width="35%"
       :close-on-click-modal="false"
     >
       <span style="text-align:center;display: block; margin-bottom: 12px;">Nhập xe thứ {{number}}</span>
@@ -14,17 +14,29 @@
         :model="importData"
         :rules="rules"
         ref="importData"
-        label-width="100px"
+        label-width="150px"
         class="demo-ruleForm"
         :label-position="labelPosition"
       >
-        <el-form-item label="Số khung" prop="sokhung">
-          <el-input v-model="importData.sokhung"></el-input>
+        <el-form-item label="Số khung - số máy" prop="id">
+          <el-select
+            v-model="importData.id"
+            placeholder="Chọn số khung số máy"
+            clearable
+            filterable
+          >
+            <el-option
+              v-for="p in product"
+              :key="p.id"
+              :value="p.id"
+              :label="p.sokhung+' - '+p.somay"
+            >
+              <span style="margin-right: 20px;">{{p.id}}</span>
+              <span style="margin-right: 20px;">{{p.sokhung}}</span>
+              <span>{{p.somay}}</span>
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="Số máy" prop="somay">
-          <el-input v-model="importData.somay"></el-input>
-        </el-form-item>
-        <el-form-item></el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('importData')">OK</el-button>
         </el-form-item>
@@ -39,29 +51,28 @@ export default {
   props: {
     visibleDetail: null,
     detailId: null,
-    inputNumber: null
+    inputNumber: null,
+    product: null
   },
   data() {
     return {
       labelPosition: "left",
       number: 1,
       importData: {
-        sokhung: "",
-        somay: "",
-        chitietnhapId: null,
+        id: null,
+        chitiethoadonId: null,
       },
       rules: {
-        sokhung: [
-          { required: true, message: "Nhập số khung", trigger: "blur" }
+        id: [
+          { required: true, message: "Chọn số khung số máy", trigger: "blur" }
         ],
-        somay: [{ required: true, message: "Nhập số máy", trigger: "blur" }]
       }
     };
   },
   methods: {
     closeDialog() {
       if (this.number < this.inputNumber+1) {
-        alert("nhập đủ số xe là "+this.inputNumber);
+        alert("nhập đủ số xe là " + this.inputNumber);
       } else {
         this.visibleDetail = false;
         this.$emit("dialog-close");
@@ -75,8 +86,8 @@ export default {
       };
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.importData.chitietnhapId = this.detailId;
-          Axios.post("import/motorcycleDetail", this.importData, myConfig)
+          this.importData.chitiethoadonId = this.detailId;
+          Axios.post("export/updateMotorcycle", this.importData, myConfig)
             .then(resp => {
               alert(resp.data);
               this.number++;

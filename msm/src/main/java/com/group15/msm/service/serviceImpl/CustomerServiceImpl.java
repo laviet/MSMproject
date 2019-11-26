@@ -29,4 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDao setCustomer(CustomerDao customerDao) {
         return repository.save(customerDao);
     }
+
+    @Override
+    public Iterable<CustomerDao> getAllCustomer() {
+        return repository.findAll();
+    }
 }

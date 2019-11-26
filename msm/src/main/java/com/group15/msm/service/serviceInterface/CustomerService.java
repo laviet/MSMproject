@@ -12,6 +12,6 @@ import java.util.Optional;
  */
 public interface CustomerService {
     Optional<CustomerDao> getCutomerById(int id);
-
     CustomerDao setCustomer(CustomerDao customerDao);
+    Iterable<CustomerDao> getAllCustomer();
 }

@@ -18,7 +18,7 @@
           <el-input v-model="customer.email"></el-input>
         </el-form-item>
         <el-form-item label="Giới tính" prop="gioitinh">
-          <el-radio-group v-model="employee.gioitinh">
+          <el-radio-group v-model="customer.gioitinh">
             <el-radio  label="Nam"></el-radio>
             <el-radio  label="Nữ"></el-radio>
             <el-radio  label="Khác"></el-radio>

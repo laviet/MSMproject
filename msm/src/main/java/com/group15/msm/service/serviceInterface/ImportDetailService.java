@@ -9,5 +9,6 @@ import com.group15.msm.dao.ImportDetailDao;
  * Time: 09:03
  */
 public interface ImportDetailService {
-ImportDetailDao setImportDetail(ImportDetailDao detailDao);
+    ImportDetailDao setImportDetail(ImportDetailDao detailDao);
+    Iterable<ImportDetailDao> getAllByProductId(String productId);
 }

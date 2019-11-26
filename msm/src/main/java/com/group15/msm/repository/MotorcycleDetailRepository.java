@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author: laviet
  * Version: 1.0
@@ -15,5 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MotorcycleDetailRepository extends CrudRepository<MotorcycleDetailDao, Integer> {
-
+    List<MotorcycleDetailDao> getByChitietnhapId(int id);
 }

@@ -2,7 +2,7 @@
   <div>
     <el-card shadow="never">
       <div slot="header" class="header">
-        <span>hóa dơn nhập</span>
+        <span>hóa đơn nhập</span>
       </div>
       <el-form
         :model="importData"

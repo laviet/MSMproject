@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ImportDetailRepository extends CrudRepository<ImportDetailDao, Integer> {
-
+    Iterable<ImportDetailDao> getAllBySanphamId(String productId);
 }

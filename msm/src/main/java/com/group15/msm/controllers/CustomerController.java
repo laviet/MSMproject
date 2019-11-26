@@ -34,6 +34,11 @@ public class CustomerController {
     @Autowired
     private UserLoginService userLoginService;
 
+    @GetMapping("/customers")
+    public ResponseEntity getAllEmployee(){
+        Iterable<CustomerDao> customerDaos=customerService.getAllCustomer();
+        return DataResponse.getData(customerDaos);
+    }
     @GetMapping("")
     public ResponseEntity getECustomer(@CurrentUser UserPrinciple userPrinciple) {
         Optional<CustomerDao> customerDao = customerService.getCutomerById(userPrinciple.getId().intValue());

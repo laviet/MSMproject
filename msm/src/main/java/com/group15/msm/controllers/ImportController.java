@@ -1,15 +1,13 @@
 package com.group15.msm.controllers;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.group15.msm.dao.ImportDetailDao;
 import com.group15.msm.dao.ImportInvoiceDao;
 import com.group15.msm.dao.MotorcycleDetailDao;
-import com.group15.msm.message.response.DataResponse;
 import com.group15.msm.model.ImportModel;
 import com.group15.msm.model.MotorcycleDetailModel;
 import com.group15.msm.service.serviceInterface.ImportDetailService;
 import com.group15.msm.service.serviceInterface.ImportInvoiceService;
-import com.group15.msm.service.serviceInterface.MotorcycleService;
+import com.group15.msm.service.serviceInterface.MotorcycleDetailService;
 import com.group15.msm.util.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +33,7 @@ public class ImportController {
     @Autowired
     ImportDetailService importDetailService;
     @Autowired
-    MotorcycleService motorcycleService;
+    MotorcycleDetailService motorcycleService;
 
     @PostMapping("")
     @Transactional
@@ -53,14 +51,16 @@ public class ImportController {
 
         importInvoiceService.setImportInvoice(importInvoiceDao);
        ImportDetailDao detailDao= importDetailService.setImportDetail(importDetailDao);
-        System.out.println("vaoi day: "+detailDao.getId());
         return ResponseEntity.ok(detailDao.getId());
     }
     @PostMapping("/motorcycleDetail")
     public ResponseEntity setMotorcycleDetail(@Valid @RequestBody MotorcycleDetailModel motorcycleDetailModel){
-        System.out.println(motorcycleDetailModel.getSokhung()+motorcycleDetailModel.getSomay()+motorcycleDetailModel.getChitietnhapId()+motorcycleDetailModel.getChitiethoadonId());
         MotorcycleDetailDao motorcycleDetailDao=new MotorcycleDetailDao();
-        BeanMapper.BeanCoppy(motorcycleDetailModel, motorcycleDetailDao);
+
+        motorcycleDetailDao.setSokhung(motorcycleDetailModel.getSokhung());
+        motorcycleDetailDao.setSomay(motorcycleDetailModel.getSomay());
+        motorcycleDetailDao.setChitietnhapId(motorcycleDetailModel.getChitietnhapId());
+
         motorcycleService.setMotorcycleDetial(motorcycleDetailDao);
         return ResponseEntity.ok("Thành công");
     }
