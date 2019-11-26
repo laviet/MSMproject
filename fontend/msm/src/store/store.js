@@ -10,7 +10,6 @@ export const store = new Vuex.Store({
         number: 0,
         value: 'la van viet',
         dataTest: {},
-
         accessToken: null,
         loggingIn: false,
         loginError: null,
@@ -23,6 +22,7 @@ export const store = new Vuex.Store({
             // state.number+=n.amount
             state.dataTest = n
         },
+
         removeMessage:(state, message)=>{
             state.message=message
         },
@@ -44,7 +44,8 @@ export const store = new Vuex.Store({
         },
         updateAccessToken: (state, accessToken) => {
           state.accessToken = accessToken;
-        }
+        },
+
     },
 
     actions: {

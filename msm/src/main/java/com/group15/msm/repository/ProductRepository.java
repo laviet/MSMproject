@@ -1,6 +1,7 @@
 package com.group15.msm.repository;
 
 import com.group15.msm.dao.ProductDao;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
  * Time: 15:01
  */
 @Repository
-public interface ProductRepository extends CrudRepository<ProductDao, String> {
+public interface ProductRepository extends JpaRepository<ProductDao, String> {
+    Iterable<ProductDao> getAllByTensanphamContains(String name);
 
 }

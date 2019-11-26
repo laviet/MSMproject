@@ -5,15 +5,6 @@
         <i class="el-icon-s-home"></i>
         Trang chủ
       </el-button>
-      <el-input
-        class="search"
-        placeholder="Search"
-        clearable
-        v-model="search"
-        prefix-icon="el-icon-search"
-      >
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
 
       <span v-if="currentUser">
         <el-button class="button" type="text" @click="logoutMethod">Đăng xuất</el-button>
@@ -78,10 +69,12 @@ export default {
       registerShow: false
     };
   },
+
   methods: {
-    ...Vuex.mapActions(["fetchAccessToken", "removeAlert"]),
+    ...Vuex.mapActions(["fetchAccessToken", "removeAlert", "dataSearch"]),
     homeMethod() {
       this.$router.push("/");
+      window.location.reload()
     },
     logoutMethod() {
       if (confirm("Bạn có muốn đăng xuất")) {
@@ -93,6 +86,7 @@ export default {
         this.$router.push("/");
       }
     },
+
     InformationHand(command) {
       if (command == "profile") {
         let lengthRole = this.roles.length;
@@ -133,11 +127,11 @@ export default {
       }
     },
     functionHand(command) {
-      if(command=='createImportInvoice'){
-        this.$router.push('/invoice/import')
+      if (command == "createImportInvoice") {
+        this.$router.push("/invoice/import");
       }
-      if(command=='createExportInvoice'){
-         this.$router.push('/invoice/export')
+      if (command == "createExportInvoice") {
+        this.$router.push("/invoice/export");
       }
     }
   },

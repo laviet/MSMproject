@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,9 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     @Autowired
     ProductService productService;
+
     @GetMapping("")
-    public ResponseEntity getAllProduct(){
-        Iterable<ProductDao> productDaos=productService.getAllProduct();
+    public ResponseEntity getAllProduct() {
+        Iterable<ProductDao> productDaos = productService.getAllProduct();
         return DataResponse.getData(productDaos);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity getProdcutByName(@RequestParam(name = "name") String name) {
+        Iterable<ProductDao> productDaos = productService.getAllByName(name.trim());
+        return DataResponse.getData(productDaos);
+    }
+    @GetMapping("/sort")
+    public ResponseEntity getProdcutSort(@RequestParam(name = "category") String category) {
+       Iterable<ProductDao> productDao=productService.getAllProductSort(category);
+        return DataResponse.getData(productDao);
     }
 }

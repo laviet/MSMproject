@@ -31,4 +31,5 @@ public class ProductDao {
     private double dongia;
     @Column(name = "hangsanxuat_id", nullable = false)
     private String hangsanxuatId;
+    private String hinhanh;
 }
