@@ -1,5 +1,5 @@
 # MSMproject
-this is project for subject professional develop management
+Trang web quản lý bán hàng xe máy
 các chứng năng:
 - xem danh sách sản phẩm: all 
 - đăng nhập, đăng xuất: all
