@@ -2,14 +2,13 @@ package com.group15.msm.controllers;
 
 import com.group15.msm.dao.SupplierDao;
 import com.group15.msm.message.response.DataResponse;
+import com.group15.msm.security.IsCustomer;
 import com.group15.msm.service.serviceInterface.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 /**
  * @author: laviet
@@ -22,9 +21,11 @@ import java.util.Optional;
 public class SupplierController {
     @Autowired
     SupplierService supplierService;
+
     @GetMapping("")
-    public ResponseEntity getSupplier(){
-        Iterable<SupplierDao> supplierDao=supplierService.getAllSupplier();
+    @IsCustomer
+    public ResponseEntity getSupplier() {
+        Iterable<SupplierDao> supplierDao = supplierService.getAllSupplier();
         return DataResponse.getData(supplierDao);
     }
 }

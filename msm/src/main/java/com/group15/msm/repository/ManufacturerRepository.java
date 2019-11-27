@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * Time: 00:17
  */
 @Repository
-public interface ManufacturerRepository extends CrudRepository<ManufacturerDao,String> {
+public interface ManufacturerRepository extends CrudRepository<ManufacturerDao, String> {
 
 }

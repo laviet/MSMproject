@@ -1,7 +1,6 @@
 package com.group15.msm.service.serviceInterface;
 
 import com.group15.msm.dao.ProductDao;
-import org.springframework.data.domain.Sort;
 
 /**
  * @author: laviet
@@ -11,6 +10,8 @@ import org.springframework.data.domain.Sort;
  */
 public interface ProductService {
     Iterable<ProductDao> getAllProduct();
+
     Iterable<ProductDao> getAllProductSort(String category);
+
     Iterable<ProductDao> getAllByName(String name);
 }

@@ -185,17 +185,17 @@ export default {
                   if (this.products[i].loaisanpham == "Xe máy") {
                     this.chitietnhapId = resp.data;
                     this.showDialog = true;
-                  }else if(this.products[i].loaisanpham == "Phụ tùng"){
-                    for(let i=0;i<this.number;i++){
-                      let data={chitietnhapId: resp.data}
-                       Axios.post("import/motorcycleDetail",data, myConfig)
+                  } else if (this.products[i].loaisanpham == "Phụ tùng") {
+                    for (let i = 0; i < this.number; i++) {
+                      let data = { chitietnhapId: resp.data };
+                      Axios.post("import/motorcycleDetail", data, myConfig);
                     }
-                    alert('Thành công')
+                    alert("Thành công");
                   }
                 }
               }
             } else {
-              alert("error "+resp.data);
+              alert("error " + resp.data);
             }
           });
         }
@@ -266,7 +266,8 @@ export default {
           this.suppliers = resp.data.myData;
         })
         .catch(err => {
-          alert("getSupplier error: " + err);
+          this.$router.push("/denied");
+          window.console.log(err);
         });
     },
     getProducts() {

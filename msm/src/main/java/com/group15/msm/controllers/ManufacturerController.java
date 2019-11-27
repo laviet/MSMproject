@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManufacturerController {
     @Autowired
     ManufacturerService manufacturerService;
+
     @GetMapping("")
-    public ResponseEntity getManufacturer(){
-        Iterable<ManufacturerDao> manufacturerDaos=manufacturerService.getAllManufacturer();
+    public ResponseEntity getManufacturer() {
+        Iterable<ManufacturerDao> manufacturerDaos = manufacturerService.getAllManufacturer();
         return DataResponse.getData(manufacturerDaos);
     }
+
 }

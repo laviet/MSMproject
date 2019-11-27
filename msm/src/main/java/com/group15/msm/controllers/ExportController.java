@@ -11,7 +11,6 @@ import com.group15.msm.service.serviceInterface.InvoiceSaleService;
 import com.group15.msm.service.serviceInterface.MotorcycleDetailService;
 import com.group15.msm.util.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +39,10 @@ public class ExportController {
 
     @PostMapping("")
     @Transactional
-    public ResponseEntity exportInvoice(@Valid @RequestBody ExportModel exportModel){
+    public ResponseEntity exportInvoice(@Valid @RequestBody ExportModel exportModel) {
 
-        InvoiceSaleDao invoiceSaleDao=new InvoiceSaleDao();
-        InvoiceDetailDao invoiceDetailDao=new InvoiceDetailDao();
+        InvoiceSaleDao invoiceSaleDao = new InvoiceSaleDao();
+        InvoiceDetailDao invoiceDetailDao = new InvoiceDetailDao();
 
         BeanMapper.BeanCoppy(exportModel, invoiceSaleDao);
 
@@ -53,19 +52,21 @@ public class ExportController {
         invoiceDetailDao.setHoadonbanhangId(exportModel.getId());
 
         invoiceSaleService.setInvoiceSale(invoiceSaleDao);
-        InvoiceDetailDao detailDao= invoiceDetailService.setInvoiceDetail(invoiceDetailDao);
+        InvoiceDetailDao detailDao = invoiceDetailService.setInvoiceDetail(invoiceDetailDao);
         return ResponseEntity.ok(detailDao.getId());
     }
+
     @PostMapping("/updateMotorcycle")
-    public ResponseEntity updateDetailMotorcycle(@RequestBody MotorcycleDetailDao motorcycleDetailDao){
-        MotorcycleDetailDao detailDao=motorcycleService.getMotorcycleById(motorcycleDetailDao.getId());
+    public ResponseEntity updateDetailMotorcycle(@RequestBody MotorcycleDetailDao motorcycleDetailDao) {
+        MotorcycleDetailDao detailDao = motorcycleService.getMotorcycleById(motorcycleDetailDao.getId());
         detailDao.setChitiethoadonId(motorcycleDetailDao.getChitiethoadonId());
         motorcycleService.setMotorcycleDetial(detailDao);
         return ResponseEntity.ok("Thành công");
     }
+
     @GetMapping("/getImportDetail")
-    public ResponseEntity getImportDetail(@RequestParam(name="id") String productId){
-        List<MotorcycleDetailDao> motorList=motorcycleDetail.getMotorycycle(productId);
+    public ResponseEntity getImportDetail(@RequestParam(name = "id") String productId) {
+        List<MotorcycleDetailDao> motorList = motorcycleDetail.getMotorycycle(productId);
         return DataResponse.getData(motorList);
     }
 }

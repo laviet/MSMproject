@@ -39,8 +39,8 @@ public class ImportController {
     @Transactional
     public ResponseEntity importInvoice(@Valid @RequestBody ImportModel importModel) {
 
-        ImportInvoiceDao importInvoiceDao=new ImportInvoiceDao();
-        ImportDetailDao importDetailDao=new ImportDetailDao();
+        ImportInvoiceDao importInvoiceDao = new ImportInvoiceDao();
+        ImportDetailDao importDetailDao = new ImportDetailDao();
 
         BeanMapper.BeanCoppy(importModel, importInvoiceDao);
 
@@ -50,12 +50,13 @@ public class ImportController {
         importDetailDao.setHoadonnhapId(importModel.getId());
 
         importInvoiceService.setImportInvoice(importInvoiceDao);
-       ImportDetailDao detailDao= importDetailService.setImportDetail(importDetailDao);
+        ImportDetailDao detailDao = importDetailService.setImportDetail(importDetailDao);
         return ResponseEntity.ok(detailDao.getId());
     }
+
     @PostMapping("/motorcycleDetail")
-    public ResponseEntity setMotorcycleDetail(@Valid @RequestBody MotorcycleDetailModel motorcycleDetailModel){
-        MotorcycleDetailDao motorcycleDetailDao=new MotorcycleDetailDao();
+    public ResponseEntity setMotorcycleDetail(@Valid @RequestBody MotorcycleDetailModel motorcycleDetailModel) {
+        MotorcycleDetailDao motorcycleDetailDao = new MotorcycleDetailDao();
 
         motorcycleDetailDao.setSokhung(motorcycleDetailModel.getSokhung());
         motorcycleDetailDao.setSomay(motorcycleDetailModel.getSomay());

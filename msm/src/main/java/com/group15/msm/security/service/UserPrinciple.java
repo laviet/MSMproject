@@ -30,9 +30,11 @@ public class UserPrinciple implements UserDetails {
 
     @JsonIgnore
     private String password;
-     public UserPrinciple(){
 
-     }
+    public UserPrinciple() {
+
+    }
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrinciple(Long id, String name,

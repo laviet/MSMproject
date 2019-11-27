@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class InvoiceDetailServiceImpl implements InvoiceDetailService {
     @Autowired
     InvoiceDetailRepository repository;
+
     @Override
     public InvoiceDetailDao setInvoiceDetail(InvoiceDetailDao detailDao) {
         return repository.save(detailDao);

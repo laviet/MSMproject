@@ -21,8 +21,8 @@ public class MotorcycleDetailDao {
     private int id;
     private String sokhung;
     private String somay;
-    @Column(name="chitietnhap_id", nullable = false)
+    @Column(name = "chitietnhap_id", nullable = false)
     private Integer chitietnhapId;
-    @Column(name="chitiethoadon_id")
+    @Column(name = "chitiethoadon_id")
     private Integer chitiethoadonId;
 }

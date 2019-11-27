@@ -1,5 +1,8 @@
 package com.group15.msm.security;
 
+import com.group15.msm.security.jwt.JwtAuthEntryPoint;
+import com.group15.msm.security.jwt.JwtAuthTokenFilter;
+import com.group15.msm.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.group15.msm.security.jwt.JwtAuthEntryPoint;
-import com.group15.msm.security.jwt.JwtAuthTokenFilter;
-import com.group15.msm.security.service.UserDetailsServiceImpl;
 /**
  * @author: laviet
  * Version: 1.0
@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/product","/api/product/search","/api/product/sort").permitAll()
+                .antMatchers("/api/product", "/api/product/search", "/api/product/sort").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

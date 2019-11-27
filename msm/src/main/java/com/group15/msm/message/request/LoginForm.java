@@ -1,9 +1,11 @@
 package com.group15.msm.message.request;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 /**
  * @author: laviet
  * Version: 1.0
@@ -14,7 +16,7 @@ import javax.validation.constraints.Size;
 @Setter
 public class LoginForm {
     @NotBlank
-    @Size(min=3, max = 60)//todo
+    @Size(min = 3, max = 60)
     private String username;
 
     @NotBlank

@@ -33,9 +33,10 @@ public class ProductController {
         Iterable<ProductDao> productDaos = productService.getAllByName(name.trim());
         return DataResponse.getData(productDaos);
     }
+
     @GetMapping("/sort")
     public ResponseEntity getProdcutSort(@RequestParam(name = "category") String category) {
-       Iterable<ProductDao> productDao=productService.getAllProductSort(category);
+        Iterable<ProductDao> productDao = productService.getAllProductSort(category);
         return DataResponse.getData(productDao);
     }
 }

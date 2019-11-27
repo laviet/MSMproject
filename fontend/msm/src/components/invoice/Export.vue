@@ -274,7 +274,8 @@ export default {
           this.customers = resp.data.myData;
         })
         .catch(err => {
-          alert("getCustomer error: " + err);
+          this.$router.push("/denied");
+          window.console.log(err);
         });
     },
     getManufacturer() {

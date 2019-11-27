@@ -12,6 +12,12 @@ import java.util.List;
  */
 public interface MotorcycleDetailService {
     MotorcycleDetailDao getMotorcycleById(int id);
+
     MotorcycleDetailDao setMotorcycleDetial(MotorcycleDetailDao motorcycleDetailDao);
+
     List<MotorcycleDetailDao> getMotorcycleByImportDetialId(int id);
+
+    int getCountSaled();
+
+    Long getAllCount();
 }

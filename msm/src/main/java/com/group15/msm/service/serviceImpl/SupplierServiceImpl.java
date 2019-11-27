@@ -6,8 +6,6 @@ import com.group15.msm.service.serviceInterface.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * @author: laviet
  * Version: 1.0

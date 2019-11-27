@@ -21,7 +21,7 @@ public class MotorcycleDetailServiceImpl implements MotorcycleDetailService {
 
     @Override
     public MotorcycleDetailDao setMotorcycleDetial(MotorcycleDetailDao detailDao) {
-       return repository.save(detailDao);
+        return repository.save(detailDao);
     }
 
     @Override
@@ -31,6 +31,16 @@ public class MotorcycleDetailServiceImpl implements MotorcycleDetailService {
 
     @Override
     public MotorcycleDetailDao getMotorcycleById(int id) {
-        return repository.findById(id).orElseThrow(()->new IllegalStateException("not found motorcycle by id="+id));
+        return repository.findById(id).orElseThrow(() -> new IllegalStateException("not found motorcycle by id=" + id));
+    }
+
+    @Override
+    public int getCountSaled() {
+        return repository.getCountSaled();
+    }
+
+    @Override
+    public Long getAllCount() {
+        return repository.count();
     }
 }

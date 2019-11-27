@@ -10,5 +10,6 @@ import com.group15.msm.dao.ImportDetailDao;
  */
 public interface ImportDetailService {
     ImportDetailDao setImportDetail(ImportDetailDao detailDao);
+
     Iterable<ImportDetailDao> getAllByProductId(String productId);
 }

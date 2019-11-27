@@ -1,10 +1,8 @@
 package com.group15.msm.repository;
 
 import com.group15.msm.dao.MotorcycleDetailDao;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +16,7 @@ import java.util.List;
 @Repository
 public interface MotorcycleDetailRepository extends CrudRepository<MotorcycleDetailDao, Integer> {
     List<MotorcycleDetailDao> getByChitietnhapId(int id);
+
+    @Query(value = "SELECT COUNT(id) FROM chitietxe WHERE chitiethoadon_id!=''", nativeQuery = true)
+    int getCountSaled();
 }

@@ -45,11 +45,13 @@ public class EmployeeController {
         }
         return DataResponse.getData(employeeModel);
     }
+
     @GetMapping("/employees")
-    public ResponseEntity getAllEmployee(){
-        Iterable<EmployeeDao> employeeDaos=employeeService.getAllEmployee();
+    public ResponseEntity getAllEmployee() {
+        Iterable<EmployeeDao> employeeDaos = employeeService.getAllEmployee();
         return DataResponse.getData(employeeDaos);
     }
+
     @Transactional
     @PostMapping("/updateEmployee")
     public ResponseEntity<String> updateEmployee(@Valid @RequestBody EmployeeModel employeeModel) {

@@ -1,12 +1,11 @@
 package com.group15.msm.controllers;
 
 import com.group15.msm.dao.CustomerDao;
-import com.group15.msm.dao.EmployeeDao;
 import com.group15.msm.dao.UserDao;
 import com.group15.msm.message.response.DataResponse;
 import com.group15.msm.model.CustomerModel;
-import com.group15.msm.model.EmployeeModel;
 import com.group15.msm.security.CurrentUser;
+import com.group15.msm.security.IsCustomer;
 import com.group15.msm.security.service.UserPrinciple;
 import com.group15.msm.service.serviceInterface.CustomerService;
 import com.group15.msm.service.serviceInterface.UserLoginService;
@@ -35,6 +34,7 @@ public class CustomerController {
     private UserLoginService userLoginService;
 
     @GetMapping("/customers")
+    @IsCustomer
     public ResponseEntity getAllEmployee(){
         Iterable<CustomerDao> customerDaos=customerService.getAllCustomer();
         return DataResponse.getData(customerDaos);

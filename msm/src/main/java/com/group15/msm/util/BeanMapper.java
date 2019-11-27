@@ -11,7 +11,7 @@ import org.dozer.DozerBeanMapper;
 public class BeanMapper {
     //coppy bean
     public static void BeanCoppy(Object source, Object destination) {
-        DozerBeanMapper beanMapper=new DozerBeanMapper();
+        DozerBeanMapper beanMapper = new DozerBeanMapper();
         beanMapper.map(source, destination);
     }
 }

@@ -23,14 +23,14 @@ public class MotorcycleDetail {
     @Autowired
     private MotorcycleDetailService motorcycleDetailService;
 
-    public List<MotorcycleDetailDao> getMotorycycle(String productId){
+    public List<MotorcycleDetailDao> getMotorycycle(String productId) {
 
-        List<MotorcycleDetailDao> motorcycleList=new ArrayList<MotorcycleDetailDao>();
+        List<MotorcycleDetailDao> motorcycleList = new ArrayList<MotorcycleDetailDao>();
 
-        Iterable<ImportDetailDao> importDetails=importDetailService.getAllByProductId(productId);
-        for (ImportDetailDao dao: importDetails) {
-            List<MotorcycleDetailDao> motor=motorcycleDetailService.getMotorcycleByImportDetialId(dao.getId());
-            for (MotorcycleDetailDao m: motor) {
+        Iterable<ImportDetailDao> importDetails = importDetailService.getAllByProductId(productId);
+        for (ImportDetailDao dao : importDetails) {
+            List<MotorcycleDetailDao> motor = motorcycleDetailService.getMotorcycleByImportDetialId(dao.getId());
+            for (MotorcycleDetailDao m : motor) {
                 motorcycleList.add(m);
             }
         }

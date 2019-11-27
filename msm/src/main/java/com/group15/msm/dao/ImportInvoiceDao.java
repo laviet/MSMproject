@@ -27,9 +27,9 @@ public class ImportInvoiceDao {
     private String id;
     @Column(nullable = false)
     private Date ngaynhap;
-    @Column(name="nhacungcap_id",nullable = false)
+    @Column(name = "nhacungcap_id", nullable = false)
     private String nhacungcapId;
-    @Column(name="nhanvien_id",nullable = false)
+    @Column(name = "nhanvien_id", nullable = false)
     @Min(value = 1)
     private int nhanvienId;
 }

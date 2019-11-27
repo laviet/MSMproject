@@ -12,6 +12,8 @@ import java.util.Optional;
  */
 public interface EmployeeService {
     Optional<EmployeeDao> getEmployeeById(int id);
+
     EmployeeDao setEmployee(EmployeeDao employeeDao);
+
     Iterable<EmployeeDao> getAllEmployee();
 }

@@ -2,8 +2,6 @@ package com.group15.msm.service.serviceInterface;
 
 import com.group15.msm.dao.SupplierDao;
 
-import java.util.List;
-
 /**
  * @author: laviet
  * Version: 1.0

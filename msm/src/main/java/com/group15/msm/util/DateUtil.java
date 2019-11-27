@@ -10,9 +10,9 @@ import java.util.Date;
  * Time: 21:22
  */
 public class DateUtil {
-public static String convertDate(Date date){
-    SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
-    return dateFormat.format(date);
-}
+    public static String convertDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(date);
+    }
 
 }

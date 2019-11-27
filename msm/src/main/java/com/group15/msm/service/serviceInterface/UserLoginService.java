@@ -12,6 +12,7 @@ import java.util.Optional;
  */
 public interface UserLoginService {
     Optional<UserDao> getUserById(int id);
+
     void updateUser(UserDao userDao);
 
 }

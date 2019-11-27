@@ -17,6 +17,6 @@ import org.springframework.stereotype.Repository;
 public interface UserLoginRepository extends CrudRepository<UserDao, Integer> {
 
     @Modifying
-    @Query(value="UPDATE users SET email=:email, name=:name WHERE id=:id",nativeQuery = true)
-    void setUser(@Param("email") String email, @Param("name") String name, @Param("id") int id );
+    @Query(value = "UPDATE users SET email=:email, name=:name WHERE id=:id", nativeQuery = true)
+    void setUser(@Param("email") String email, @Param("name") String name, @Param("id") int id);
 }

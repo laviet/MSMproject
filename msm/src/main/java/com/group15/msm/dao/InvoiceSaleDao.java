@@ -24,8 +24,8 @@ public class InvoiceSaleDao {
     private String id;
     @Column(nullable = false)
     private Date ngayban;
-    @Column(name="khachhang_id", nullable = false)
+    @Column(name = "khachhang_id", nullable = false)
     private int khachhangId;
-    @Column(name="nhanvien_id", nullable = false)
+    @Column(name = "nhanvien_id", nullable = false)
     private int nhanvienId;
 }

@@ -1,11 +1,14 @@
 package com.group15.msm.controllers;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.Valid;
-
-
+import com.group15.msm.dao.Role;
+import com.group15.msm.dao.RoleName;
+import com.group15.msm.dao.User;
+import com.group15.msm.message.request.LoginForm;
+import com.group15.msm.message.request.SignUpForm;
+import com.group15.msm.message.response.JwtResponse;
+import com.group15.msm.repository.RoleRepository;
+import com.group15.msm.repository.UserRepository;
+import com.group15.msm.security.jwt.JwtProvider;
 import com.group15.msm.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,21 +18,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.group15.msm.message.request.LoginForm;
-import com.group15.msm.message.request.SignUpForm;
-import com.group15.msm.message.response.JwtResponse;
-import com.group15.msm.dao.Role;
-import com.group15.msm.dao.RoleName;
-import com.group15.msm.dao.User;
-import com.group15.msm.repository.RoleRepository;
-import com.group15.msm.repository.UserRepository;
-import com.group15.msm.security.jwt.JwtProvider;
+import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author: laviet
  * Version: 1.0
@@ -60,7 +54,7 @@ public class AuthRestAPIs {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-        System.out.println(loginRequest.getUsername()+" "+loginRequest.getPassword());
+        System.out.println(loginRequest.getUsername() + " " + loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -70,18 +64,19 @@ public class AuthRestAPIs {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        String userLogin=userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getName();
-        Set<Role> role =userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getRoles();
-        return ResponseEntity.ok(new JwtResponse(jwt,userLogin, role));
+        String userLogin = userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getName();
+        Set<Role> role = userDetailsServiceImpl.getUserLogin(loginRequest.getUsername()).getRoles();
+        return ResponseEntity.ok(new JwtResponse(jwt, userLogin, role));
     }
+
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<String>("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
@@ -94,7 +89,7 @@ public class AuthRestAPIs {
         Set<Role> roles = new HashSet<>();
 
         strRoles.forEach(role -> {
-            switch(role) {
+            switch (role) {
                 case "admin":
                     Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));

@@ -17,7 +17,6 @@
           <el-dropdown-menu>
             <el-dropdown-item command="profile">Xem thông tin cá nhân</el-dropdown-item>
             <el-dropdown-item command="update">Cập nhật thông tin</el-dropdown-item>
-            <el-dropdown-item command="showInfor">Theo dõi đơn hàng</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown class="dropdown" @command="functionHand">
@@ -74,7 +73,7 @@ export default {
     ...Vuex.mapActions(["fetchAccessToken", "removeAlert", "dataSearch"]),
     homeMethod() {
       this.$router.push("/");
-      window.location.reload()
+      window.location.reload();
     },
     logoutMethod() {
       if (confirm("Bạn có muốn đăng xuất")) {
@@ -122,8 +121,6 @@ export default {
             return true;
           }
         }
-      } else {
-        alert(command);
       }
     },
     functionHand(command) {
@@ -132,6 +129,12 @@ export default {
       }
       if (command == "createExportInvoice") {
         this.$router.push("/invoice/export");
+      }
+      if (command == "showStatistic") {
+        this.$router.push("/invoice/statistic");
+      }
+      if (command == "comment") {
+        alert('Chưa có chức năng này')
       }
     }
   },

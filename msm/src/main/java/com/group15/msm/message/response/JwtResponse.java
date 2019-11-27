@@ -22,7 +22,7 @@ public class JwtResponse {
 
     public JwtResponse(String accessToken, String currentUser, Set<Role> role) {
         this.token = accessToken;
-        this.currentUser=currentUser;
-        this.role=role;
+        this.currentUser = currentUser;
+        this.role = role;
     }
 }

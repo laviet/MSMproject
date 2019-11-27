@@ -19,7 +19,7 @@ import java.util.Date;
 @Setter
 public class ImportModel {
     @NotBlank
-    @Size(min=8)
+    @Size(min = 8)
     private String id;
     @Past
     private Date ngaynhap;
@@ -31,6 +31,6 @@ public class ImportModel {
     private String sanphamId;
     @Min(value = 1)
     private int soluong;
-    @Min(value =0)
+    @Min(value = 0)
     private double dongia;
 }

@@ -20,12 +20,12 @@ public class ImportDetailDao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="sanpham_id", nullable = false)
+    @Column(name = "sanpham_id", nullable = false)
     private String sanphamId;
     @Min(value = 1)
     private int soluong;
-    @Min(value =0)
+    @Min(value = 0)
     private double dongia;
-    @Column(name="hoadonnhap_id", nullable = false)
+    @Column(name = "hoadonnhap_id", nullable = false)
     private String hoadonnhapId;
 }

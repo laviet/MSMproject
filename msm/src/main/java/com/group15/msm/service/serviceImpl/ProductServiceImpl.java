@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Iterable<ProductDao> getAllProductSort(String category) {
-       return repository.findAll(Sort.by(Sort.Direction.ASC,category));
+        return repository.findAll(Sort.by(Sort.Direction.ASC, category));
     }
 
     @Override

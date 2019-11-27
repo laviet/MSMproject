@@ -14,11 +14,13 @@ public class DataResponse {
     public static ResponseEntity<Object> getData(Object body) {
         return ResponseEntity.ok(new Data(body));
     }
+
     @Getter
     private static class Data {
-        private Object myData ;
-        private String success="success";
-        private String version="1.0";
+        private Object myData;
+        private String success = "success";
+        private String version = "1.0";
+
         private Data(Object data) {
             this.myData = data;
         }
